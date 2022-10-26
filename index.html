@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button onclick="start()"> 🅾️ Start</button>
+        <button onclick="stop()"> 🛑 Stop</button>
+        <button onclick="breack()"> 🎗️ Breack</button>
+        <button onmouseup="driver(3)"> 🅾 Drive</button>
+        <button onmouseup="Claxon(3)"> 🅾 Claxon</button>
+    </div>
+
+    <div id="yourDivId">
+    <img src="img/objectExplained.gif" alt="">
+    </div>
+
+    <script>
+    var d = document.getElementById('yourDivId');
+        const car = {
+            name : "Range Rover",
+            model : "Toyota",
+            weight : "850Kg",
+            color : "white",
+            isStarted : false,
+            positionX : 0,
+            start : function(){
+                this.isStarted = true;
+                
+            },
+            stop : function(){
+                this.isStarted = false;
+                this.positionX = 0
+            },
+            drive : function(a){
+                if(this.isStarted)
+                    this.positionX += a
+            },
+            claxonner: function(){
+
+            },
+            break : function(){
+                this.isStarted = false;
+            },
+            affiche : function(){
+                console.log(`
+                    ETAT : ${this.isStarted}
+                    POSITION : ${this.positionX}
+
+                `)
+            }
+        }
+
+        function start(){
+            car.start()
+            car.affiche()
+        }
+        function driver(a){
+            if (!car.isStarted)
+                return
+            car.drive(a)
+            car.affiche()
+            d.style.position = "absolute";
+            d.style.left = car.positionX + 'px';
+            const t = setTimeout(function(){
+                driver(a + 1)
+            },50)
+           
+        }
+        function stop(){
+            car.stop()
+            d.style.position = "absolute";
+            d.style.left = car.positionX + 'px';
+            car.affiche()
+        }
+        function breack(){
+            car.break()
+            car.affiche()
+        }
+        
+    </script>
+</body>
+</html>
