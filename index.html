@@ -12,7 +12,7 @@
         <button onclick="stop()"> 🛑 Stop</button>
         <button onclick="breack()"> 🎗️ Breack</button>
         <button onmouseup="driver(3)"> 🅾 Drive</button>
-        <button onmouseup="Claxon(3)"> 🅾 Claxon</button>
+        <button onmouseup="claxon()"> 🅾 Claxon</button>
     </div>
 
     <div id="yourDivId">
@@ -41,6 +41,8 @@
                     this.positionX += a
             },
             claxonner: function(){
+                const audio = new Audio("audio/hon.wav")
+                audio.play()
 
             },
             break : function(){
@@ -55,8 +57,12 @@
             }
         }
 
+        function claxon() {
+            car.claxonner()
+        }
         function start(){
             car.start()
+            car.claxonner()
             car.affiche()
         }
         function driver(a){
